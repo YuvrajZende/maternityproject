@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Login{% endblock %}
+
+{% block content %}
+<h2>Patient Login</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <input type="text" name="username" class="form-control" placeholder="Username" required>
+    </div>
+    <div class="mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+    </div>
+    <button type="submit" class="btn-custom">Login</button>
+</form>
+<div class="auth-footer">
+    <p>Don't have an account? <a href="{% url 'patient_registration' %}">Register here</a></p>
+</div>
+{% endblock %}

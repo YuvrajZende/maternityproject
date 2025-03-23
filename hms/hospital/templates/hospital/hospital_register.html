@@ -1,0 +1,53 @@
+
+{% extends "base.html" %}
+
+{% block title %}Hospital Registration - Health Network{% endblock %}
+
+{% block content %}
+    <div class="registration-container">
+        <h2 class="heading">Hospital Registration</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <h3>Hospital Information</h3>
+            <div class="form-group">
+                <label for="hospitalName">Legal Name of Hospital *</label>
+                <input type="text" id="hospitalName" name="name" value="{{ hospital.name }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="registrationNumber">Registration Number (if applicable)</label>
+                <input type="text" id="registrationNumber" name="registration_number" value="{{ hospital.registration_number }}">
+            </div>
+            <div class="form-group">
+                <label for="hospitalAddress">Hospital Address *</label>
+                <textarea id="hospitalAddress" name="address" required>{{ hospital.address }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="contactPhone">Contact Phone Number *</label>
+                <input type="tel" id="contactPhone" name="contact_number" value="{{ hospital.contact_number }}" required>
+            </div>
+            
+            <h3>Ownership and Management</h3>
+            <div class="form-group">
+                <label for="licenseNumber">Hospital License Number *</label>
+                <input type="text" id="licenseNumber" name="license_number" value="{{ hospital.license_number }}" required>
+            </div>
+
+            <h3>Patient Services</h3>
+            <div class="form-group">
+                <label for="insuranceAccepted">Insurance Accepted *</label>
+                <select id="insuranceAccepted" name="insurance_accepted" required>
+                    <option value="" {% if not hospital.insurance_accepted %}selected{% endif %}>Select Option</option>
+                    <option value="Yes" {% if hospital.insurance_accepted == "Yes" %}selected{% endif %}>Yes</option>
+                    <option value="No" {% if hospital.insurance_accepted == "No" %}selected{% endif %}>No</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn-custom">Register</button>
+        </form>
+    </div>
+    <p class="auth-footer mt-4">Already have an account? 
+        <a href="{% url 'hospital_login' %}" class="hover:underline">Login</a>
+    </p>
+{% endblock %}

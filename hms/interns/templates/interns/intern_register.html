@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Intern Registration - HMS{% endblock %}
+
+{% block content %}
+<h2>Intern Registration</h2>
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="username" class="form-control mb-2" placeholder="Username" required>
+    <input type="email" name="email" class="form-control mb-2" placeholder="Email" required>
+    <input type="password" name="password1" class="form-control mb-2" placeholder="Password" required>
+    <input type="password" name="password2" class="form-control mb-2" placeholder="Confirm Password" required>
+    <input type="text" name="contact_number" class="form-control mb-2" placeholder="Contact Number" required>
+    <input type="text" name="education" class="form-control mb-2" placeholder="Education" required>
+    <input type="text" name="specialization" class="form-control mb-2" placeholder="Specialization" required>
+    <button type="submit" class="btn-custom">Register</button>
+</form>
+<div class="auth-footer">
+    Already have an account? <a href="{% url 'intern_login' %}">Login</a>
+</div>
+{% endblock %}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HMS Authentication{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --dark-blue: #0d1b2a;
+            --medium-blue: #1b263b;
+            --light-blue: #00b4d8;
+            --soft-blue: #e3f2fd;
+            --white: #ffffff;
+            --gray: #d3d3d3;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-blue), var(--medium-blue));
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: var(--medium-blue);
+            padding: 40px;
+            border-radius: 15px;
+            width: 420px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border: 1px solid var(--gray);
+        }
+        
+        .auth-container h2 {
+            color: var(--light-blue);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--gray);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--light-blue);
+            box-shadow: none;
+            outline: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-container h2 {
+            color: var(--light-blue);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .btn-custom {
+            background: var(--light-blue);
+            color: var(--white);
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            background: var(--white);
+            color: var(--dark-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.4);
+        }
+
+        .auth-footer {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .auth-footer a {
+            color: var(--soft-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            color: var(--light-blue);
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

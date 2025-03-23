@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Dashboard</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #34495e;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #27ae60;
+        }
+
+        .input-field {
+            padding: 8px;
+            width: 80%;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .department-list {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .department-item {
+            padding: 5px;
+            background: #eaf2ff;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Hospital Dashboard</h2>
+        <ul>
+            <li><a onclick="showSection('home')">Home</a></li>
+            <li><a onclick="showSection('patients')">Patients</a></li>
+            <li><a onclick="showSection('appointments')">Appointments</a></li>
+            <li><a onclick="showSection('doctors')">Doctors</a></li>
+            <li><a onclick="showSection('departments')">Departments</a></li>
+            <li><a onclick="showSection('settings')">Settings</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">Welcome to the Hospital Management System</div>
+
+        <div id="home" class="content active">
+            <h2>Dashboard Overview</h2>
+            <p>Select a section from the sidebar to view details.</p>
+        </div>
+
+        <div id="patients" class="content">
+            <h2>Patients</h2>
+            <p>Manage all patient records and details.</p>
+            <button class="btn" onclick="updatePatients()">Add New Patient</button>
+        </div>
+
+        <div id="appointments" class="content">
+            <h2>Appointments</h2>
+            <p>View and manage scheduled appointments.</p>
+            <button class="btn" onclick="updateAppointments()">Schedule Appointment</button>
+        </div>
+
+        <div id="doctors" class="content">
+            <h2>Doctors</h2>
+            <p>View and assign doctors to different cases.</p>
+            <button class="btn" onclick="updateDoctors()">Add New Doctor</button>
+        </div>
+
+        <div id="departments" class="content">
+            <h2>Departments</h2>
+            <p>Manage hospital departments and staff allocation.</p>
+
+            <div class="department-list">
+                <h3>Current Departments</h3>
+                <ul id="departmentList">
+                    <li class="department-item">Cardiology</li>
+                    <li class="department-item">Neurology</li>
+                    <li class="department-item">Pediatrics</li>
+                    <li class="department-item">Radiology</li>
+                    <li class="department-item">Orthopedics</li>
+                </ul>
+            </div>
+
+            <input type="text" id="newDepartment" class="input-field" placeholder="Enter new department">
+            <button class="btn" onclick="addDepartment()">Add Department</button>
+        </div>
+
+        <div id="settings" class="content">
+            <h2>Settings</h2>
+            <p>Modify system settings and preferences.</p>
+            <button class="btn" onclick="updateSettings()">Change Preferences</button>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            let sections = document.querySelectorAll(".content");
+            sections.forEach(section => section.classList.remove("active"));
+
+            document.getElementById(sectionId).classList.add("active");
+        }
+
+        function updatePatients() {
+            alert("New patient record has been added!");
+            document.getElementById("patients").innerHTML += "<p><strong>New Patient:</strong> John Doe - Age 35</p>";
+        }
+
+        function updateAppointments() {
+            alert("New appointment has been scheduled!");
+            document.getElementById("appointments").innerHTML += "<p><strong>New Appointment:</strong> Dr. Smith - 12th March 2025</p>";
+        }
+
+        function updateDoctors() {
+            alert("New doctor added to the hospital!");
+            document.getElementById("doctors").innerHTML += "<p><strong>New Doctor:</strong> Dr. Alice Brown - Cardiologist</p>";
+        }
+
+        function updateSettings() {
+            alert("Settings updated successfully!");
+            document.getElementById("settings").innerHTML += "<p><strong>Update:</strong> Notification Preferences Changed</p>";
+        }
+
+        function addDepartment() {
+            let deptInput = document.getElementById("newDepartment");
+            let deptList = document.getElementById("departmentList");
+
+            if (deptInput.value.trim() !== "") {
+                let newDept = document.createElement("li");
+                newDept.classList.add("department-item");
+                newDept.textContent = deptInput.value;
+                deptList.appendChild(newDept);
+
+                alert("New department added: " + deptInput.value);
+                deptInput.value = "";
+            } else {
+                alert("Please enter a department name!");
+            }
+        }
+    </script>
+
+</body>
+</html>

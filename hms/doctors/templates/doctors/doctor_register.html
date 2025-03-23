@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Doctor Registration{% endblock %}
+
+{% block content %}
+<h2>Doctor Registration</h2>
+<form method="POST">
+    {% csrf_token %}
+    
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="hospital" class="form-label">Hospital</label>
+        <select name="hospital" class="form-control">
+            {% for hospital in hospitals %}
+                <option value="{{ hospital.id }}">{{ hospital.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="specialization" class="form-label">Specialization</label>
+        <input type="text" name="specialization" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="contact_number" class="form-label">Contact Number</label>
+        <input type="text" name="contact_number" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="license_number" class="form-label">License Number</label>
+        <input type="text" name="license_number" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-custom">Register</button>
+
+    <p class="auth-footer">Already have an account? <a href="{% url 'doctor_login' %}">Login</a></p>
+</form>
+{% endblock %}
