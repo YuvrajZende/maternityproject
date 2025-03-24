@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import CustomUser, Hospital
+from .models import Doctor, Patient, Intern
 
-admin.site.register(CustomUser)
-admin.site.register(Hospital)
+admin.site.register(Doctor)
+admin.site.register(Patient)
+admin.site.register(Intern)
+#admin.site.register(Appointment)

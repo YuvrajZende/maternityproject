@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import intern_register, intern_login, intern_logout
+from .views import intern_dashboard, assigned_patients
 
 urlpatterns = [
-    path('intern/register/', intern_register, name='intern_register'),
-    path('intern/login/', intern_login, name='intern_login'),
-    path('intern/logout/', intern_logout, name='intern_logout'),
+    path('dashboard/', intern_dashboard, name='intern_dashboard'),
+    path('assigned-patients/', assigned_patients, name='assigned_patients'),
 ]

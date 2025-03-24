@@ -1,34 +1,35 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
+from authentication.models import CustomUser
 
-class CustomUser(AbstractUser):
-    USER_TYPE_CHOICES = (
-        ('hospital', 'Hospital'),
-        ('doctor', 'Doctor'),
-        ('patient', 'Patient'),
-        ('intern', 'Intern'),
-    )
-    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
-
-    # Fix the error by adding related_name to avoid conflicts
-    groups = models.ManyToManyField(
-        "auth.Group",
-        related_name="customuser_groups",
-        blank=True
-    )
-    user_permissions = models.ManyToManyField(
-        "auth.Permission",
-        related_name="customuser_permissions",
-        blank=True
-    )
-
-class Hospital(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    address = models.TextField()
-    contact_number = models.CharField(max_length=15, unique=True)
-    registration_number = models.CharField(max_length=50, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+class Doctor(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="doctor_profile")
+    specialization = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.name
+        return f"Dr. {self.user.username} ({self.specialization})"
+
+class Patient(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE ,related_name="patient_profile")
+    age = models.IntegerField()
+    medical_history = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
+
+class Intern(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="intern_profile")
+    mentor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, blank=True, related_name="mentored_interns")
+
+    def __str__(self):
+        return f"Intern {self.user.username}"
+
+'''
+class Appointment(models.Model):
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="appointments")
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name="appointments")
+    date = models.DateTimeField()
+    description = models.TextField()
+
+    def __str__(self):
+        return f"Appointment: {self.patient.user.username} with Dr. {self.doctor.user.username} on {self.date}"
+'''

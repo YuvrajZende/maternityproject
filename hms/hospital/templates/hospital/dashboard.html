@@ -82,45 +82,6 @@
         .active {
             display: block;
         }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            background-color: #27ae60;
-        }
-
-        .input-field {
-            padding: 8px;
-            width: 80%;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .department-list {
-            margin-top: 15px;
-            padding: 10px;
-            background: #f9f9f9;
-            border-radius: 5px;
-        }
-
-        .department-item {
-            padding: 5px;
-            background: #eaf2ff;
-            margin: 5px 0;
-            border-radius: 5px;
-        }
     </style>
 </head>
 <body>
@@ -148,44 +109,26 @@
         <div id="patients" class="content">
             <h2>Patients</h2>
             <p>Manage all patient records and details.</p>
-            <button class="btn" onclick="updatePatients()">Add New Patient</button>
         </div>
 
         <div id="appointments" class="content">
             <h2>Appointments</h2>
             <p>View and manage scheduled appointments.</p>
-            <button class="btn" onclick="updateAppointments()">Schedule Appointment</button>
         </div>
 
         <div id="doctors" class="content">
             <h2>Doctors</h2>
             <p>View and assign doctors to different cases.</p>
-            <button class="btn" onclick="updateDoctors()">Add New Doctor</button>
         </div>
 
         <div id="departments" class="content">
             <h2>Departments</h2>
             <p>Manage hospital departments and staff allocation.</p>
-
-            <div class="department-list">
-                <h3>Current Departments</h3>
-                <ul id="departmentList">
-                    <li class="department-item">Cardiology</li>
-                    <li class="department-item">Neurology</li>
-                    <li class="department-item">Pediatrics</li>
-                    <li class="department-item">Radiology</li>
-                    <li class="department-item">Orthopedics</li>
-                </ul>
-            </div>
-
-            <input type="text" id="newDepartment" class="input-field" placeholder="Enter new department">
-            <button class="btn" onclick="addDepartment()">Add Department</button>
         </div>
 
         <div id="settings" class="content">
             <h2>Settings</h2>
             <p>Modify system settings and preferences.</p>
-            <button class="btn" onclick="updateSettings()">Change Preferences</button>
         </div>
     </div>
 
@@ -193,45 +136,7 @@
         function showSection(sectionId) {
             let sections = document.querySelectorAll(".content");
             sections.forEach(section => section.classList.remove("active"));
-
             document.getElementById(sectionId).classList.add("active");
-        }
-
-        function updatePatients() {
-            alert("New patient record has been added!");
-            document.getElementById("patients").innerHTML += "<p><strong>New Patient:</strong> John Doe - Age 35</p>";
-        }
-
-        function updateAppointments() {
-            alert("New appointment has been scheduled!");
-            document.getElementById("appointments").innerHTML += "<p><strong>New Appointment:</strong> Dr. Smith - 12th March 2025</p>";
-        }
-
-        function updateDoctors() {
-            alert("New doctor added to the hospital!");
-            document.getElementById("doctors").innerHTML += "<p><strong>New Doctor:</strong> Dr. Alice Brown - Cardiologist</p>";
-        }
-
-        function updateSettings() {
-            alert("Settings updated successfully!");
-            document.getElementById("settings").innerHTML += "<p><strong>Update:</strong> Notification Preferences Changed</p>";
-        }
-
-        function addDepartment() {
-            let deptInput = document.getElementById("newDepartment");
-            let deptList = document.getElementById("departmentList");
-
-            if (deptInput.value.trim() !== "") {
-                let newDept = document.createElement("li");
-                newDept.classList.add("department-item");
-                newDept.textContent = deptInput.value;
-                deptList.appendChild(newDept);
-
-                alert("New department added: " + deptInput.value);
-                deptInput.value = "";
-            } else {
-                alert("Please enter a department name!");
-            }
         }
     </script>
 

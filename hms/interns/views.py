@@ -1,39 +1,20 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, logout
-from .forms import InternRegistrationForm, InternLoginForm
-from hospital.models import CustomUser
-from .models import Intern
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Intern, AssignedPatient
 
-def intern_register(request):
-    if request.method == 'POST':
-        form = InternRegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            Intern.objects.create(
-                user=user,
-                contact_number=form.cleaned_data['contact_number'],
-                education=form.cleaned_data['education'],
-                specialization=form.cleaned_data['specialization']
-            )
-            login(request, user)
-            return redirect('dashboard')  # Redirect to a dashboard or homepage
-    else:
-        form = InternRegistrationForm()
-    
-    return render(request, 'intern_register.html', {'form': form})
+@login_required
+def intern_dashboard(request):
+    intern = get_object_or_404(Intern, user=request.user)
+    assigned_patients = AssignedPatient.objects.filter(intern=intern)
 
-def intern_login(request):
-    if request.method == 'POST':
-        form = InternLoginForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('dashboard')  # Redirect to a dashboard or homepage
-    else:
-        form = InternLoginForm()
-    
-    return render(request, 'intern_login.html', {'form': form})
+    return render(request, 'interns/intern_dashboard.html', {
+        'intern': intern,
+        'assigned_patients': assigned_patients
+    })
 
-def intern_logout(request):
-    logout(request)
-    return redirect('intern_login')
+@login_required
+def assigned_patients(request):
+    intern = get_object_or_404(Intern, user=request.user)
+    assigned_patients = AssignedPatient.objects.filter(intern=intern)
+
+    return render(request, 'interns/assigned_patients.html', {'assigned_patients': assigned_patients})

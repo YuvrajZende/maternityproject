@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Supervised Interns</h2>
+<ul>
+    {% for supervised_intern in supervised_interns %}
+        <li>{{ supervised_intern.intern.user.username }}</li>
+    {% empty %}
+        <li>No supervised interns</li>
+    {% endfor %}
+</ul>
+{% endblock %}

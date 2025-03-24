@@ -4204,10 +4204,8 @@ padding-right: 0 !important;
                     <div class="dropdown">
                         <a class="signup-btn">SignUp</a>
                         <div class="dropdown-content">
-                            <a href="{% url 'hospital_register' %}">🏥 SignUp as Hospital</a>
-                            <a href="{% url 'doctor_register' %}">🩺 SignUp as Doctor</a>
-                            <a href="{% url 'patient_register' %}">👩‍⚕️ SignUp as Patient</a>
-                            <a href="{% url 'intern_register' %}">🎓 SignUp as Intern</a>
+                            <a href="{% url 'register' %}">🏥 SignUp</a>
+                            
                         </div>
                     </div>
                 </div>
@@ -4226,10 +4224,7 @@ padding-right: 0 !important;
 
             <!-- Dropdown Menu -->
             <ul class="dropdown-menu" aria-labelledby="loginDropdown">
-                <li><a class="dropdown-item" href="{% url 'hospital_login' %}">🏥 Login as Hospital</a></li>
-                <li><a class="dropdown-item" href="{% url 'doctor_login' %}">🩺 Login as Doctor</a></li>
-                <li><a class="dropdown-item" href="{% url 'patient_login' %}">👩‍⚕️ Login as Patient</a></li>
-                <li><a class="dropdown-item" href="{% url 'intern_login' %}">🎓 Login as Intern</a></li>
+                <li><a class="dropdown-item" href="{% url 'login' %}">🏥 Login</a></li>
             </ul>
         </div>
     </div>

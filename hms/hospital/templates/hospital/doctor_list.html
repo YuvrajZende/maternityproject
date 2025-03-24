@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Doctors</h2>
+<ul>
+    {% for doctor in doctors %}
+        <li>Dr. {{ doctor.user.username }} - {{ doctor.specialization }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

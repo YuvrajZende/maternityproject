@@ -1,27 +1,33 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from .forms import HospitalRegistrationForm, HospitalLoginForm
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Doctor, Patient, Intern
+from patients.models import MedicalRecord, Appointment
 
-def hospital_register(request):
-    if request.method == 'POST':
-        form = HospitalRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('hospital_dashboard')  # Redirect to login after registration
-    else:
-        form = HospitalRegistrationForm()
-    return render(request, 'hospital/hospital_register.html', {'form': form})
+@login_required
+def dashboard(request):
+    doctors = Doctor.objects.count()
+    patients = Patient.objects.count()
+    interns = Intern.objects.count()
+    appointments = Appointment.objects.count()
 
-def hospital_login(request):
-    if request.method == 'POST':
-        form = HospitalLoginForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('hospital_dashboard')  # Redirect after login
-    else:
-        form = HospitalLoginForm()
-    return render(request, 'hospital/hospital_login.html', {'form': form})
+    return render(request, 'hospital/dashboard.html', {
+        'doctors': doctors,
+        'patients': patients,
+        'interns': interns,
+        'appointments': appointments
+    })
 
-def hospital_dashboard(request):
-    return render(request , 'hospital/hospital_dashboard.html')
+@login_required
+def doctor_list(request):
+    doctors = Doctor.objects.all()
+    return render(request, 'hospital/doctor_list.html', {'doctors': doctors})
+
+@login_required
+def patient_list(request):
+    patients = Patient.objects.all()
+    return render(request, 'hospital/patient_list.html', {'patients': patients})
+
+@login_required
+def intern_list(request):
+    interns = Intern.objects.all()
+    return render(request, 'hospital/intern_list.html', {'interns': interns})

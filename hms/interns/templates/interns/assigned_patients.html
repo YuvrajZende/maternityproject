@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Assigned Patients</h2>
+<ul>
+    {% for assigned_patient in assigned_patients %}
+        <li>{{ assigned_patient.patient.user.username }} - Notes: {{ assigned_patient.notes }}</li>
+    {% empty %}
+        <li>No assigned patients</li>
+    {% endfor %}
+</ul>
+{% endblock %}
